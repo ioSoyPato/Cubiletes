@@ -51,7 +51,7 @@ se considera el dado más alto individual. Devuelve un entero que representa el 
 
 
 
-Este proyecto esta subido en github: 
+Este proyecto esta subido en github: https://github.com/ioSoyPato/Cubiletes
 */
 
 #include <stdio.h>
