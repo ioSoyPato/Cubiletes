@@ -68,7 +68,7 @@ El flujo del juego es gestionado en la función main, que se encarga de:
 
 ## Estructura de los archivos
 ```bash
-|-Proeycto1
+|-Cubiletes
 |
 |--archivosC
 |----cubiletes.c
@@ -78,6 +78,23 @@ El flujo del juego es gestionado en la función main, que se encarga de:
 ````
 
 ## Forma de ejecucion
+Clonar el repositorio
+```bash
+git clone https://github.com/ioSoyPato/Cubiletes.git
+```
+Abrir la carpeta clonada
+```bash
+cd Cubiletes/archivosC
+```
+Compilar el archivo C en la carpeta ejecutables
 ```bash
 gcc -o ../ejecutables/cubiletes cubiletes.c
+```
+Cambiar a la carpeta ejecutables
+```bash
+cd ../ejecutables
+```
+Ejecutar el programa
+```bash
+./cubiletes
 ```
