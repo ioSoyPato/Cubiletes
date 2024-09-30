@@ -343,3 +343,157 @@ int desempatar(int count1[6], int count2[6], int combinacion) {
 }
 ```
 
+## Explicación adicional (desempatar)
+Aqui es una explicación de nuestra unica función "dificil" de entender porque pues siii en efecto esta medio ocaciono embolias en el equipo y no dire a quien pero a mi no fue (Pero usted no sabe quien escribio esto) (pd. fue pato)
+
+### Función desempatar
+
+#### Parámetros de entrada:
+
+- __int count1[6]__: Representa la frecuencia de cada valor (del "9" al "As") en los dados del Jugador 1. Por ejemplo, count1[i] indica cuántas veces apareció el valor i+1.
+
+- __int count2[6]__: Similar a count1, pero para el Jugador 2.
+
+- __int combinacion__: Un número que indica el tipo de combinación de dados que ambos jugadores han sacado y están empatados. El valor de combinacion puede ser:
+
+  - 1: Un par
+  - 2: Dos pares
+  - 3: Tercia
+  - 4: Full house
+
+Lo que hace la función: La función evalúa las combinaciones de ambos jugadores y devuelve:
+
+- __1__ si el Jugador 1 gana el desempate.
+- __2__ si el Jugador 2 gana el desempate.
+- __0__ si el empate persiste después de todas las reglas.
+
+`Veamos cada caso en detalle con ejemplos:`
+
+### Caso 1: Un Par (combinacion == 1)
+Explicación: En este caso, ambos jugadores tienen un par, y la función intenta desempatar buscando cuál par tiene un valor mayor. Si ambos tienen el mismo par, se comparan los valores restantes de los dados.
+
+```c
+case 1: { // Un par
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 2 && count2[i] != 2) return 1;
+        if (count2[i] == 2 && count1[i] != 2) return 2;
+    }
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 1 && count2[i] == 1) continue;
+        if (count1[i] == 1) return 1;
+        if (count2[i] == 1) return 2;
+    }
+    return 0; // Empate
+}
+```
+Ejemplo:
+
+- Jugador 1: `{0, 1, 2, 1, 0, 1}` → Tiene un par de Joto (2 veces) y dos 10.
+- Jugador 2: `{1, 0, 2, 1, 1, 0}` → Tiene un par de Joto (2 veces) y un 9 y un Reina.
+
+Ambos tienen un par del mismo valor (Joto). La función entonces compara los dados restantes:
+
+- Jugador 1 tiene `10`, `10`, y `Reina`.
+- Jugador 2 tiene `9`, `Reina`, y `Rey`.
+
+El dado más alto es `Rey` de Jugador 2, así que Jugador 2 gana.
+
+### Caso 2: Dos Pares (combinacion == 2)
+Explicación: En este caso, ambos jugadores tienen dos pares. Se comparan los valores de los pares más altos primero, luego los pares menores, y finalmente el dado restante.
+
+```c
+case 2: { // Dos pares
+    int parMayor1 = 0, parMayor2 = 0, parMenor1 = 0, parMenor2 = 0;
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 2) {
+            if (parMayor1 == 0) parMayor1 = i + 1;
+            else parMenor1 = i + 1;
+        }
+        if (count2[i] == 2) {
+            if (parMayor2 == 0) parMayor2 = i + 1;
+            else parMenor2 = i + 1;
+        }
+    }
+    if (parMayor1 != parMayor2) return (parMayor1 > parMayor2) ? 1 : 2;
+    if (parMenor1 != parMenor2) return (parMenor1 > parMenor2) ? 1 : 2;
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 1 && count2[i] != 1) return 1;
+        if (count2[i] == 1 && count1[i] != 1) return 2;
+    }
+    return 0; // Empate
+}
+```
+Ejemplo:
+
+- Jugador 1: `{0, 2, 0, 2, 1, 0}` → Dos pares de 10 y Reina y un Rey.
+- Jugador 2: `{1, 0, 2, 2, 0, 0}` → Dos pares de Joto y Reina y un 9.
+
+Comparando los pares mayores:
+- Jugador 1 tiene el par mayor de `Reina` y Jugador 2 también.
+
+Comparando los pares menores:
+- Jugador 1 tiene `10` y Jugador 2 tiene `Joto`.
+
+
+Como `Joto` __es mayor__ que `10`, Jugador 2 gana.
+
+### Caso 3: Tercia (combinacion == 3)
+Explicación: En el caso de que ambos jugadores tengan una tercia, se compara el valor de la tercia. Si ambas son iguales, se comparan los dados restantes.
+
+```c
+case 3: { // Tercia
+    int valorTercia1 = 0, valorTercia2 = 0;
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 3) valorTercia1 = i + 1;
+        if (count2[i] == 3) valorTercia2 = i + 1;
+    }
+    if (valorTercia1 != valorTercia2) return (valorTercia1 > valorTercia2) ? 1 : 2;
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 1 && count2[i] != 1) return 1;
+        if (count2[i] == 1 && count1[i] != 1) return 2;
+    }
+    return 0; // Empate
+}
+```
+Ejemplo:
+
+- Jugador 1: `{0, 3, 0, 0, 1, 1}` → Tercia de `10` y un `Rey` y un `As`.
+- Jugador 2: `{0, 3, 0, 0, 0, 2}` → Tercia de `10` y dos `As`.
+
+Ambos tienen la misma tercia (10). Al comparar los dados restantes:
+
+- Jugador 1 tiene `Rey` y `As`.
+- Jugador 2 tiene dos `As`.
+
+Jugador 2 tiene un dado más alto (`As` repetido), así que gana.
+
+### Caso 4: Full House (combinacion == 4)
+Explicación: Si ambos jugadores tienen un Full House, se desempata comparando el valor de la tercia en el Full House.
+
+```c
+case 4: { // Full house
+    int valorTercia1 = 0, valorTercia2 = 0;
+    for (int i = 5; i >= 0; i--) {
+        if (count1[i] == 3) valorTercia1 = i + 1;
+        if (count2[i] == 3) valorTercia2 = i + 1;
+    }
+    return (valorTercia1 > valorTercia2) ? 1 : (valorTercia2 > valorTercia1) ? 2 : 0;
+}
+```
+Ejemplo:
+
+- Jugador 1: `{0, 3, 0, 2, 0, 0}` → Full House con tercia de `10` y par de `Reina`.
+- Jugador 2: `{0, 0, 3, 2, 0, 0}` → Full House con tercia de `Joto` y par de `Reina`.
+
+La tercia de Jugador 2 (`Joto`) es mayor que la tercia de Jugador 1 (`10`), así que Jugador 2 gana.
+
+
+### En fin entonces que hace esta bella función
+La función desempatar maneja los diferentes casos de empate evaluando cada combinación de acuerdo a reglas específicas:
+
+- Un Par: Se compara el valor del par y, si es igual, los valores restantes.
+
+- Dos Pares: Se comparan los pares mayores y menores, y luego el dado restante.
+- Tercia: Se compara el valor de la tercia y luego los valores restantes.
+- Full House: Se compara el valor de la tercia en el Full House.
+
