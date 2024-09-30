@@ -296,7 +296,49 @@ int desempatar(int count1[6], int count2[6], int combinacion) {
             }
             return 0; // Empate
         }
-        // Casos similares para las demás combinaciones (Dos pares, Tercia, Full house)
+        case 2: { // Dos pares
+            int parMayor1 = 0, parMayor2 = 0, parMenor1 = 0, parMenor2 = 0;
+            for (int i = 5; i >= 0; i--) {
+                if (count1[i] == 2) {
+                    if (parMayor1 == 0) parMayor1 = i + 1;
+                    else parMenor1 = i + 1;
+                }
+                if (count2[i] == 2) {
+                    if (parMayor2 == 0) parMayor2 = i + 1;
+                    else parMenor2 = i + 1;
+                }
+            }
+            if (parMayor1 != parMayor2) return (parMayor1 > parMayor2) ? 1 : 2;
+            if (parMenor1 != parMenor2) return (parMenor1 > parMenor2) ? 1 : 2;
+            for (int i = 5; i >= 0; i--) {
+                if (count1[i] == 1 && count2[i] != 1) return 1;
+                if (count2[i] == 1 && count1[i] != 1) return 2;
+            }
+            return 0; // Empate
+        }
+        case 3: { // Tercia
+            int valorTercia1 = 0, valorTercia2 = 0;
+            for (int i = 5; i >= 0; i--) {
+                if (count1[i] == 3) valorTercia1 = i + 1;
+                if (count2[i] == 3) valorTercia2 = i + 1;
+            }
+            if (valorTercia1 != valorTercia2) return (valorTercia1 > valorTercia2) ? 1 : 2;
+            for (int i = 5; i >= 0; i--) {
+                if (count1[i] == 1 && count2[i] != 1) return 1;
+                if (count2[i] == 1 && count1[i] != 1) return 2;
+            }
+            return 0; // Empate
+        }
+        case 4: { // Full house
+            int valorTercia1 = 0, valorTercia2 = 0;
+            for (int i = 5; i >= 0; i--) {
+                if (count1[i] == 3) valorTercia1 = i + 1;
+                if (count2[i] == 3) valorTercia2 = i + 1;
+            }
+            return (valorTercia1 > valorTercia2) ? 1 : (valorTercia2 > valorTercia1) ? 2 : 0;
+        }
+        default:
+            return 0; // Empate para combinaciones más altas
     }
 }
 ```
