@@ -73,7 +73,7 @@ int main() {
     int combinacion1 = 0, combinacion2 = 0;
     char nombre1[20], nombre2[20];
     char respuesta;
-    const char* valores[] = {"9", "10", "Jack", "Queen", "King", "Ace"};
+    const char* valores[] = {"9", "10", "Joto", "Quina", "Rey", "As"};
     char tecla;
 
     // Inicializar la semilla del generador de números aleatorios con la libreria tiempo 
@@ -97,7 +97,7 @@ int main() {
         scanf("%19s", nombre2);
 
         // Generar los números aleatorios para ambos jugadores con rand e imprimir sus resultados
-        printf("Jugador 1 presiona cualquier tecla para empezar: ");
+        printf("\nJugador 1 presiona cualquier tecla para empezar: ");
         scanf("%s",&tecla);
         for (int i = 0; i < 5; i++) {
             array1[i] = rand() % 6 + 1;
@@ -106,7 +106,7 @@ int main() {
         combinacion1 = calcular_combinacion(count1);
         imprimir_resultados(nombre1, array1, combinacion1, valores);
 
-        printf("Jugador 2 presiona cualquier tecla para empezar: ");
+        printf("\nJugador 2 presiona cualquier tecla para empezar: ");
         scanf("%s",&tecla);
         for (int i = 0; i < 5; i++) {
             array2[i] = rand() % 6 + 1;
@@ -118,22 +118,22 @@ int main() {
 
         // Determinar el ganador basado en las reglas de desempate
         if (combinacion1 > combinacion2) {
-            printf("El ganador es %s\n", nombre1);
+            printf("\nEl ganador es %s\n", nombre1);
         } else if (combinacion2 > combinacion1) {
-            printf("El ganador es %s\n", nombre2);
+            printf("\nEl ganador es %s\n", nombre2);
         } else {
             int resultado = desempatar(count1, count2, combinacion1);
             if (resultado == 1) {
-                printf("El ganador es %s\n", nombre1);
+                printf("\nEl ganador es %s\n", nombre1);
             } else if (resultado == 2) {
-                printf("El ganador es %s\n", nombre2);
+                printf("\nEl ganador es %s\n", nombre2);
             } else {
-                printf("Es un empate\n");
+                printf("\nEs un empate\n");
             }
         }
 
         // Hacer la pregunta para volver a empezar
-        printf("¿Quieres jugar otra vez? (s/n): ");
+        printf("\n\n\n¿Quieres jugar otra vez? (s/n): ");
         scanf(" %c", &respuesta);
     }
 
