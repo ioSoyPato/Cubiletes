@@ -1,6 +1,7 @@
 # 🎲 Juego de Mesa: Cubiletes
 
 👨‍🎓 Desarrollado por: Patricio Adulfo Villanueva Gío y María Paula Pérez Romo
+
 📚 Carrera: Ingeniería en Ciencia de Datos (5to semestre)
 
 ## 📝 Descripción
