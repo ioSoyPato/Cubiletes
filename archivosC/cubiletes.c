@@ -74,13 +74,14 @@ int main() {
     char nombre1[20], nombre2[20];
     char respuesta;
     const char* valores[] = {"9", "10", "Jack", "Queen", "King", "Ace"};
+    char tecla;
 
     // Inicializar la semilla del generador de números aleatorios con la libreria tiempo 
     time_t t;
     srand((unsigned int)time(&t));
 
     // Ponemos respuesta en s para que empiece el while (Nos ahorrariamos esto con un do-while pero le trababa la mente a mi compañere jaja)
-    char respuesta = 's';
+    respuesta = 's';
 
     while (respuesta == 's' || respuesta == 'S') {
         // Resetear contadores para nueva partida
@@ -97,7 +98,7 @@ int main() {
 
         // Generar los números aleatorios para ambos jugadores con rand e imprimir sus resultados
         printf("Jugador 1 presiona cualquier tecla para empezar: ");
-        scanf("");
+        scanf("%s",&tecla);
         for (int i = 0; i < 5; i++) {
             array1[i] = rand() % 6 + 1;
             count1[array1[i] - 1]++;
@@ -106,7 +107,7 @@ int main() {
         imprimir_resultados(nombre1, array1, combinacion1, valores);
 
         printf("Jugador 2 presiona cualquier tecla para empezar: ");
-        scanf("");
+        scanf("%s",&tecla);
         for (int i = 0; i < 5; i++) {
             array2[i] = rand() % 6 + 1;
             count2[array2[i] - 1]++;
