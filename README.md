@@ -102,14 +102,17 @@ Ejecutar el programa
 
 ## Como jugar
 Primero ingresas el nombre de los jugadores
+
 ![alt text](image.png)
 
 Luego el jugador 1 debe introducir cualquier letra y ejecutar enter
+
 ![alt text](image-1.png)
 
 `Solo el programa mostrara sus dados y su combinación`
 
 El jugador 2 debe repetir el mismo proceso
+
 ![alt text](image-2.png)
 
 `Solo el programa mostrara sus dados y su combinación asi como el ganador y preguntara si se desea continuar jugando`
