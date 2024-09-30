@@ -73,7 +73,7 @@ int main() {
     int combinacion1 = 0, combinacion2 = 0;
     char nombre1[20], nombre2[20];
     char respuesta;
-    const char* valores[] = {"9", "10", "Joto", "Quina", "Rey", "As"};
+    const char* valores[] = {"9", "10", "Joto", "Reina", "Rey", "As"};
     char tecla;
 
     // Inicializar la semilla del generador de números aleatorios con la libreria tiempo 
